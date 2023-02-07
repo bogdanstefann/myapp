@@ -1,6 +1,11 @@
 <h1>Hello Rails</h1>
 
-<h1><%= @test %></h1>
-<%if !@test.nil?%>
-  <h2>THIS IS NOT NIL</h2>
-<%end%>
+<ul>
+  <% @articles.each do |article| %>
+    <li>
+      <%= link_to article.title, article %>
+    </li>
+  <% end %>
+</ul>
+
+<%= link_to 'New Article', new_article_path %>
