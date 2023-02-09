@@ -1,2 +1,38 @@
 <h2><%= @article.title %></h2>
 <h2><%= @article.body %></h2>
+
+
+<%= link_to 'Edit Article', edit_article_path(@article) %>
+<%= link_to 'Delete Article', article_path(@article), data: {
+                    turbo_method: :delete,
+                    turbo_confirm: "Are you sure?"
+                  } %>
+
+<h2>Comments</h2>
+
+<ul>
+  <% @article.comments.each do |comment| %>
+    <%= comment.commenter %>
+    <li>
+      <%= comment.body %>
+    </li>
+  <% end %>
+</ul>
+
+
+<h2>Add Comment</h2>
+
+<%= form_with model: [ @article, @article.comments.build ] do |form| %>
+  <div>
+    <%= form.label :commenter %>
+    <%= form.text_field :commenter %>
+  </div>
+  <div>
+    <%= form.label :body %>
+    <%= form.text_area :body %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
